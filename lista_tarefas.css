@@ -1,0 +1,56 @@
+#titulo {
+  background: linear-gradient(
+    45deg,
+    red,
+    pink,
+    blue,
+    cyan,
+    green,
+    yellow,
+    orange
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+#conteudo {
+  display: flex;
+  padding: 5%;
+}
+
+#formulario {
+  padding: 2%;
+  width: 20%;
+  background: linear-gradient(
+    45deg,
+    red,
+    pink,
+    blue,
+    cyan,
+    green,
+    yellow,
+    orange
+  );
+}
+
+#tarefas {
+  padding: 1%;
+  width: 80%;
+  margin-left: 5%;
+  background: linear-gradient(
+    45deg,
+    red,
+    pink,
+    blue,
+    cyan,
+    green,
+    yellow,
+    orange
+  );
+}
+
+.tarefa {
+  border: 1px solid black;
+  padding: 1%;
+  margin: 10px;
+}
