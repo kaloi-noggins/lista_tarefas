@@ -1,0 +1,28 @@
+<html lang="br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lista de tarefas</title>
+    <script src="lista_tarefas.js"></script>
+    <link rel="stylesheet" href="lista_tarefas.css" />
+  </head>
+  <body>
+    <h1 id="titulo">Minha Lista de Tarefas</h1>
+    <div id="conteudo">
+      <div id="formulario">
+        <h3>Criar tarefa</h3>
+        <div action="lista_tarefas.html" method="post">
+          <p>tarefa: <input type="text" id="input_tarefa" /> <br /></p>
+          <input
+            type="button"
+            value="criar tarefa"
+            onclick="criar_tarefa(document.getElementById('input_tarefa').value)"
+          />
+        </div>
+      </div>
+      <div id="tarefas">
+        <h3>Lista de tarefas</h3>
+      </div>
+    </div>
+  </body>
+</html>

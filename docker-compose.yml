@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  # configuração da imagem do banco
+  mysqldb:
+    image: mysql
+    restart: always
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE: $MYSQL_DATABASE
+    ports:
+      - $MYSQL_LOCAL_PORT: $MYSQL_DOCKER_PORT
+    volumes:
+      - db_config:/etc/mysql
+      - db_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d
+      - ./db/backup/files/:/data_backup/data
+  
+  # configuração da imagem do aplicativo 
+  app:
+    build: 
+      context: .
+      dockerfile: ./app/dockerfile
+    image: lista_tarefas
+    env_file: ./.env
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+    depends_on:
+      - mysqldb
+    stdin_open: true
+    tty: true
+  
+# volume do banco
+volumes:
+  db-config:
+  db-data:
