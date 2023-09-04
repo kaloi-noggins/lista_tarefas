@@ -1,5 +1,6 @@
 // abertura da comunicação websocket
-const socket = new WebSocket("ws://localhost:5000");
+
+const socket = new WebSocket("ws://localhost:3000");
 
 // constrois template de tarefa com dados do banco
 const html_builder = (uuid, tarefa) => {

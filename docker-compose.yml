@@ -4,38 +4,53 @@ services:
 
   # configuração da imagem do banco
   mysqldb:
-    image: mysql
-    restart: always
+    container_name: db
+    image: mysql:8.0.34-debian
+    command: --default-authentication-plugin=mysql_native_password
+    restart: on-failure
     env_file: ./.env
     environment:
-      - MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE: $MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD:$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE:$MYSQL_DATABASE
     ports:
-      - $MYSQL_LOCAL_PORT: $MYSQL_DOCKER_PORT
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
     volumes:
       - db_config:/etc/mysql
       - db_data:/var/lib/mysql
-      - ./schema.sql:/docker-entrypoint-initdb.d
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./db/backup/files/:/data_backup/data
-  
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 1s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
+
   # configuração da imagem do aplicativo 
   app:
-    build: 
+    restart: on-failure
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    build:
       context: .
       dockerfile: ./app/dockerfile
     image: lista_tarefas
     env_file: ./.env
     environment:
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: db
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
-    depends_on:
-      - mysqldb
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    volumes:
+      - ./app:/app
+      - app/node_modules
     stdin_open: true
     tty: true
-  
+
 # volume do banco
 volumes:
-  db-config:
-  db-data:
+  db_config:
+  db_data:

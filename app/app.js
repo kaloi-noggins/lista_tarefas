@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const mysql = require("mysql");
@@ -7,8 +7,9 @@ const http = require("http");
 
 // configuração da conexão com o banco
 con = mysql.createConnection({
-  user: process.env.MYSQL_USERNAME,
-  password: process.env.MYSQL_ROOT_PASSWORD,
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
 });
 
@@ -100,7 +101,7 @@ app.delete("/", (req, res) => {
   notifica_clientes();
 });
 
-// instaciamento do servidor para escutar na porta 5000
-server.listen(5000, () => {
-  console.log("server listening on port 5000");
+// instaciamento do servidor para escutar na porta definida na variável de ambiente
+server.listen(process.env.NODE_LOCAL_PORT, () => {
+  console.log(`server listening on port ${process.env.NODE_LOCAL_PORT}`);
 });
