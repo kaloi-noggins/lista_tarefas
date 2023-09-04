@@ -1,4 +1,4 @@
-/node_modules
+*node_modules
 
 #gitignore from https://github.com/github/gitignore
 
