@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "a7311538-40ee-4bba-9a9b-fd81d369ae99",
+		"name": "Lista Tarefa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29513670"
+	},
+	"item": [
+		{
+			"name": "estático",
+			"item": [
+				{
+					"name": "html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "js",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/lista_tarefas.js",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"lista_tarefas.js"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "css",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/lista_tarefas.css",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"lista_tarefas.css"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "cria tarefa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uuid\":\"4b898bf8-afbd-464b-9078-d589052e9325\",\n    \"tarefa\":\"exemplo\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleta tarefa",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uuid\":\"4b898bf8-afbd-464b-9078-d589052e9325\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lê tarefas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/getTarefas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getTarefas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualiza tarefa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tarefa\":\"exemplo atualizado\" \n}"
+						},
+						"url": {
+							"raw": "localhost:3000/4b898bf8-afbd-464b-9078-d589052e9325",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"4b898bf8-afbd-464b-9078-d589052e9325"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

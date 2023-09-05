@@ -105,3 +105,6 @@ app.delete("/", (req, res) => {
 server.listen(process.env.NODE_LOCAL_PORT, () => {
   console.log(`server listening on port ${process.env.NODE_LOCAL_PORT}`);
 });
+
+// testes
+const test = require("node:test")
