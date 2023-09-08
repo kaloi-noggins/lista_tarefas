@@ -5,13 +5,13 @@ WORKDIR /app
 COPY /app/package.json .
 COPY /app/package-lock.json .
 
-from base as test
+FROM base as test
 RUN npm ci
 COPY /app .
 EXPOSE 3000
 CMD [ "npm","test" ]
 
-from base as prod
+FROM base as prod
 RUN npm ci --production
 COPY /app .
 EXPOSE 3000
