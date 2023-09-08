@@ -28,7 +28,7 @@ const wss = new ws.WebSocketServer({ server: server });
 
 // imprime uma mensagem no console avisando toda vez
 // que um novo cliente conectar
-wss.on("connection", function connection(ws) {
+wss.on("connection", function connection() {
   console.log(
     `Novo cliente conectado.\nNúmero de clientes conectados: ${wss.clients.size}`
   );
@@ -62,7 +62,7 @@ app.post("/", (req, res) => {
   sql = "INSERT INTO tarefas VALUES (?,?)";
   con.query(sql, [uuid, tarefa], (err, output) => {
     if (err) throw err;
-    res.send("Tarefa registrada");
+    res.status(200).send("Tarefa registrada");
   });
   notifica_clientes();
 });
@@ -82,9 +82,9 @@ app.put("/:id", (req, res) => {
   const { tarefa } = req.body;
 
   sql = " UPDATE tarefas SET descricao = ? WHERE id = ?";
-  con.query(sql, [tarefa, uuid], (err, output) => {
+  con.query(sql, [tarefa, uuid], (err, ouwstput) => {
     if (err) throw err;
-    res.send("Tarefa atualizada");
+    res.status(200).send("Tarefa atualizada");
   });
   notifica_clientes();
 });
@@ -96,15 +96,15 @@ app.delete("/", (req, res) => {
   sql = "DELETE FROM tarefas WHERE id = ?";
   con.query(sql, uuid, (err, output) => {
     if (err) throw err;
-    res.send("Tarefa removida");
+    res.status(200).send("Tarefa removida");
   });
   notifica_clientes();
 });
+
 
 // instaciamento do servidor para escutar na porta definida na variável de ambiente
 server.listen(process.env.NODE_LOCAL_PORT, () => {
   console.log(`server listening on port ${process.env.NODE_LOCAL_PORT}`);
 });
 
-// testes
-const test = require("node:test")
+module.exports = server

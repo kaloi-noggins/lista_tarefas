@@ -35,6 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./app/dockerfile
+      target: test
     image: lista_tarefas
     env_file: ./.env
     environment:

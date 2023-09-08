@@ -1,13 +1,18 @@
-FROM node:16
+FROM node:16 as base
 
 WORKDIR /app
 
 COPY /app/package.json .
+COPY /app/package-lock.json .
 
-RUN npm install
-
+from base as test
+RUN npm ci
 COPY /app .
-
 EXPOSE 3000
+CMD [ "npm","test" ]
 
-CMD [ "node","app.js" ]
+from base as prod
+RUN npm ci --production
+COPY /app .
+EXPOSE 3000
+CMD [ "npm","start" ]
